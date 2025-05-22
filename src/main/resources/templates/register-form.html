@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f7f9fb;
+      }
+      .container {
+        max-width: 400px;
+        margin: 60px auto;
+        border: 1px solid #e3e8ee;
+        border-radius: 8px;
+        padding: 32px 26px 28px 28px;
+        background: #fff;
+        box-shadow: 0 2px 12px 0 rgba(60, 72, 88, 0.06);
+      }
+      h1 {
+        font-size: 1.7rem;
+        margin-bottom: 20px;
+        font-weight: 600;
+        color: #23233b;
+        letter-spacing: 0.2px;
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: #333;
+      }
+      input:focus {
+        border-color: #2563eb;
+        outline: none;
+        background: #fff;
+      }
+      .gender-group {
+        margin-bottom: 15px;
+      }
+      .gender-group label {
+        display: inline;
+        font-weight: 400;
+        margin-right: 16px;
+        color: #444;
+      }
+      .gender-group input[type="radio"] {
+        margin-right: 4px;
+      }
+      .terms {
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+      }
+      .terms input[type="checkbox"] {
+        margin-right: 7px;
+        accent-color: #2563eb;
+      }
+      .terms label {
+        font-weight: 400;
+        color: #444;
+        margin-bottom: 0;
+      }
+      input[type="text"],
+      input[type="password"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"] {
+        width: 95%;
+        padding: 9px 10px;
+        margin-bottom: 15px;
+        border: 1px solid #d1d5db;
+        border-radius: 3px;
+        font-size: 1rem;
+        background: #f9fafb;
+        transition: border-color 0.2s;
+      }
+      button {
+        background: #2563eb;
+        color: #fff;
+        border: none;
+        padding: 10px 10px;
+        border-radius: 3px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        width: 100%;
+        transition: background 0.2s;
+      }
+      button:hover,
+      button:focus {
+        background: #1741a6;
+      }
+      .error-message {
+        color: #b91c1c;
+        background: #fee2e2;
+        border: 1px solid #fca5a5;
+        border-radius: 4px;
+        padding: 6px 10px;
+        margin-bottom: 10px;
+        font-size: 0.97rem;
+        font-weight: 500;
+        display: block;
+        line-height: 1.4;
+      }
+      .dob-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .dob-group select {
+        width: 33.33%;
+        padding: 8px 6px;
+        border: 1px solid #d1d5db;
+        border-radius: 3px;
+        background: #f9fafb;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+      }
+      .dob-group select:focus {
+        border-color: #2563eb;
+        background: #fff;
+      }
+      .dob-label {
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: #333;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Register</h1>
+      <form
+        action="/submit"
+        method="post"
+        autocomplete="off"
+        th:object="${user}"
+      >
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" th:field="*{firstName}" />
+        <div th:if="${#fields.hasErrors('firstName')}" style="color: red">
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('firstName')}"
+            th:text="${err}"
+          ></span>
+        </div>
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" th:field="*{lastName}" />
+        <div th:if="${#fields.hasErrors('lastName')}" style="color: red">
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('lastName')}"
+            th:text="${err}"
+          ></span>
+        </div>
+
+        <label class="dob-label" for="dateOfBirth">Date of Birth</label>
+        <div class="dob-group">
+          <select id="dobDay" name="dobDay" th:field="*{dobDay}">
+            <option value="">Day</option>
+            <option
+              th:each="d : ${#numbers.sequence(1,31)}"
+              th:value="${d}"
+              th:text="${d}"
+            ></option>
+          </select>
+          <select id="dobMonth" name="dobMonth" th:field="*{dobMonth}">
+            <option value="">Month</option>
+            <option
+              th:each="m : ${#numbers.sequence(1,12)}"
+              th:value="${m}"
+              th:text="${m}"
+            ></option>
+          </select>
+          <select id="dobYear" name="dobYear" th:field="*{dobYear}">
+            <option value="">Year</option>
+            <option
+              th:each="y : ${#numbers.sequence(1950, 2024)}"
+              th:value="${y}"
+              th:text="${y}"
+            ></option>
+          </select>
+        </div>
+        <div th:if="${#fields.hasErrors('dobDay')}" style="color: red">
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('dobDay')}"
+            th:text="${err}"
+          ></span>
+        </div>
+        <div th:if="${#fields.hasErrors('dobMonth')}" style="color: red">
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('dobMonth')}"
+            th:text="${err}"
+          ></span>
+        </div>
+        <div th:if="${#fields.hasErrors('dobYear')}" style="color: red">
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('dobYear')}"
+            th:text="${err}"
+          ></span>
+        </div>
+
+        <label for="male">Gender</label>
+        <div class="gender-group">
+          <input type="radio" id="male" th:field="*{gender}" value="M" />
+          <label for="male">Male</label>
+          <input type="radio" id="female" th:field="*{gender}" value="F" />
+          <label for="female">Female</label>
+        </div>
+        <div th:if="${#fields.hasErrors('gender')}" style="color: red">
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('gender')}"
+            th:text="${err}"
+          ></span>
+        </div>
+
+        <label for="username">Username</label>
+        <input type="text" id="username" th:field="*{username}" />
+        <div th:if="${#fields.hasErrors('username')}">
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('username')}"
+            th:text="${err}"
+          ></span>
+        </div>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" th:field="*{password}" />
+        <div th:if="${#fields.hasErrors('password')}" style="color: red">
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('password')}"
+            th:text="${err}"
+          ></span>
+        </div>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" th:field="*{email}" />
+        <div th:if="${#fields.hasErrors('email')}" style="color: red">
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('email')}"
+            th:text="${err}"
+          ></span>
+        </div>
+
+        <label for="phoneNumber">Phone Number</label>
+        <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" />
+        <div th:if="${#fields.hasErrors('phoneNumber')}" style="color: red">
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('phoneNumber')}"
+            th:text="${err}"
+          ></span>
+        </div>
+
+        <div class="terms">
+          <input
+            type="checkbox"
+            id="termsAndConditions"
+            th:field="*{termsAndConditions}"
+          />
+          <label for="termsAndConditions"
+            >I agree to the terms and conditions</label
+          >
+        </div>
+        <div
+          th:if="${#fields.hasErrors('termsAndConditions')}"
+          style="color: red"
+        >
+          <span
+            class="error-message"
+            th:each="err : ${#fields.errors('termsAndConditions')}"
+            th:text="${err}"
+          ></span>
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </body>
+</html>
