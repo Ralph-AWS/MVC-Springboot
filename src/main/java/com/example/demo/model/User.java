@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.example.demo.validation.PhoneNumber;
+
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
