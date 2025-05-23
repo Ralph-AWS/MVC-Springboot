@@ -25,6 +25,6 @@ public class RegistrationController {
         if (result.hasErrors()) {
             return "register-form";
         }
-        return "register-success";
+        return "redirect:/register-success";
     }
 }

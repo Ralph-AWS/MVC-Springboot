@@ -159,51 +159,12 @@
           ></span>
         </div>
 
-        <label class="dob-label" for="dateOfBirth">Date of Birth</label>
-        <div class="dob-group">
-          <select id="dobDay" name="dobDay" th:field="*{dobDay}">
-            <option value="">Day</option>
-            <option
-              th:each="d : ${#numbers.sequence(1,31)}"
-              th:value="${d}"
-              th:text="${d}"
-            ></option>
-          </select>
-          <select id="dobMonth" name="dobMonth" th:field="*{dobMonth}">
-            <option value="">Month</option>
-            <option
-              th:each="m : ${#numbers.sequence(1,12)}"
-              th:value="${m}"
-              th:text="${m}"
-            ></option>
-          </select>
-          <select id="dobYear" name="dobYear" th:field="*{dobYear}">
-            <option value="">Year</option>
-            <option
-              th:each="y : ${#numbers.sequence(1950, 2024)}"
-              th:value="${y}"
-              th:text="${y}"
-            ></option>
-          </select>
-        </div>
-        <div th:if="${#fields.hasErrors('dobDay')}" style="color: red">
+        <label class="dob-label" for="dob">Date of Birth</label>
+        <input type="date" id="dob" th:field="*{dob}" />
+        <div th:if="${#fields.hasErrors('dob')}" style="color: red">
           <span
             class="error-message"
-            th:each="err : ${#fields.errors('dobDay')}"
-            th:text="${err}"
-          ></span>
-        </div>
-        <div th:if="${#fields.hasErrors('dobMonth')}" style="color: red">
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('dobMonth')}"
-            th:text="${err}"
-          ></span>
-        </div>
-        <div th:if="${#fields.hasErrors('dobYear')}" style="color: red">
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('dobYear')}"
+            th:each="err : ${#fields.errors('dob')}"
             th:text="${err}"
           ></span>
         </div>
