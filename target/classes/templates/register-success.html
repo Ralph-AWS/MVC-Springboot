@@ -3,14 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Successful</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <title>Registration Success</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            border: 1px solid #e3e8ee;
+            border-radius: 8px;
+            padding: 32px 26px 28px 28px;
+            background: #fff;
+            box-shadow: 0 2px 12px 0 rgba(60, 72, 88, 0.06);
+            text-align: center;
+        }
+        h1 {
+            color: #2563eb;
+            margin-bottom: 18px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 18px;
+            background: #2563eb;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        a:hover {
+            background: #1741a6;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Registration Successful</h1>
-        <p>Thank you for registering! Your account has been created successfully.</p>
-        <a href="/register">Back to register screen</a>
+        <h1>Registration Successful!</h1>
+        <p>Thank you for registering. Your account has been created successfully.</p>
+        <a th:href="@{/users/list}">Go to User List</a>
     </div>
 </body>
 </html>

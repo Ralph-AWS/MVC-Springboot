@@ -128,125 +128,109 @@
         color: #333;
         display: block;
       }
+      .back-link {
+        display: block;
+        margin-top: 18px;
+        text-align: center;
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .back-link:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Register</h1>
-      <form
-        action="/submit"
-        method="post"
-        autocomplete="off"
-        th:object="${user}"
-      >
+      <h1 th:text="${user.id != null} ? 'Edit User' : 'Register'">Register</h1>
+      <form th:action="@{${user.id} != null ? '/users/update' : '/users/submit'}"
+            method="post"
+            autocomplete="off"
+            th:object="${user}">
+        <input type="hidden" th:if="${user.id != null}" th:field="*{id}" />
         <label for="firstName">First Name</label>
         <input type="text" id="firstName" th:field="*{firstName}" />
-        <div th:if="${#fields.hasErrors('firstName')}" style="color: red">
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('firstName')}"
-            th:text="${err}"
-          ></span>
+        <div th:if="${#fields.hasErrors('firstName')}">
+          <span class="error-message"
+                th:each="err : ${#fields.errors('firstName')}"
+                th:text="${err}"></span>
         </div>
 
         <label for="lastName">Last Name</label>
         <input type="text" id="lastName" th:field="*{lastName}" />
-        <div th:if="${#fields.hasErrors('lastName')}" style="color: red">
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('lastName')}"
-            th:text="${err}"
-          ></span>
+        <div th:if="${#fields.hasErrors('lastName')}">
+          <span class="error-message"
+                th:each="err : ${#fields.errors('lastName')}"
+                th:text="${err}"></span>
         </div>
 
         <label class="dob-label" for="dob">Date of Birth</label>
         <input type="date" id="dob" th:field="*{dob}" />
-        <div th:if="${#fields.hasErrors('dob')}" style="color: red">
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('dob')}"
-            th:text="${err}"
-          ></span>
+        <div th:if="${#fields.hasErrors('dob')}">
+          <span class="error-message"
+                th:each="err : ${#fields.errors('dob')}"
+                th:text="${err}"></span>
         </div>
 
-        <label for="male">Gender</label>
+        <label>Gender</label>
         <div class="gender-group">
           <input type="radio" id="male" th:field="*{gender}" value="M" />
           <label for="male">Male</label>
           <input type="radio" id="female" th:field="*{gender}" value="F" />
           <label for="female">Female</label>
         </div>
-        <div th:if="${#fields.hasErrors('gender')}" style="color: red">
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('gender')}"
-            th:text="${err}"
-          ></span>
+        <div th:if="${#fields.hasErrors('gender')}">
+          <span class="error-message"
+                th:each="err : ${#fields.errors('gender')}"
+                th:text="${err}"></span>
         </div>
 
         <label for="username">Username</label>
         <input type="text" id="username" th:field="*{username}" />
         <div th:if="${#fields.hasErrors('username')}">
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('username')}"
-            th:text="${err}"
-          ></span>
+          <span class="error-message"
+                th:each="err : ${#fields.errors('username')}"
+                th:text="${err}"></span>
         </div>
 
         <label for="password">Password</label>
-        <input type="password" id="password" th:field="*{password}" />
-        <div th:if="${#fields.hasErrors('password')}" style="color: red">
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('password')}"
-            th:text="${err}"
-          ></span>
+        <input type="password" id="password" th:field="*{password}" th:placeholder="${user.id != null} ? 'Leave blank to keep current password' : ''" />
+        <div th:if="${#fields.hasErrors('password')}">
+          <span class="error-message"
+                th:each="err : ${#fields.errors('password')}"
+                th:text="${err}"></span>
         </div>
 
         <label for="email">Email</label>
         <input type="email" id="email" th:field="*{email}" />
-        <div th:if="${#fields.hasErrors('email')}" style="color: red">
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('email')}"
-            th:text="${err}"
-          ></span>
+        <div th:if="${#fields.hasErrors('email')}">
+          <span class="error-message"
+                th:each="err : ${#fields.errors('email')}"
+                th:text="${err}"></span>
         </div>
 
         <label for="phoneNumber">Phone Number</label>
         <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" />
-        <div th:if="${#fields.hasErrors('phoneNumber')}" style="color: red">
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('phoneNumber')}"
-            th:text="${err}"
-          ></span>
+        <div th:if="${#fields.hasErrors('phoneNumber')}">
+          <span class="error-message"
+                th:each="err : ${#fields.errors('phoneNumber')}"
+                th:text="${err}"></span>
         </div>
 
         <div class="terms">
-          <input
-            type="checkbox"
-            id="termsAndConditions"
-            th:field="*{termsAndConditions}"
-          />
-          <label for="termsAndConditions"
-            >I agree to the terms and conditions</label
-          >
+          <input type="checkbox" id="termsAndConditions" th:field="*{termsAndConditions}" />
+          <label for="termsAndConditions">I agree to the terms and conditions</label>
         </div>
-        <div
-          th:if="${#fields.hasErrors('termsAndConditions')}"
-          style="color: red"
-        >
-          <span
-            class="error-message"
-            th:each="err : ${#fields.errors('termsAndConditions')}"
-            th:text="${err}"
-          ></span>
+        <div th:if="${#fields.hasErrors('termsAndConditions')}">
+          <span class="error-message"
+                th:each="err : ${#fields.errors('termsAndConditions')}"
+                th:text="${err}"></span>
         </div>
 
-        <button type="submit">Register</button>
+        <button type="submit" th:text="${user.id != null} ? 'Update' : 'Register'">Register</button>
       </form>
+      <a th:href="@{/users/list}" class="back-link">Back to Member List</a>
     </div>
   </body>
 </html>
